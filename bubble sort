@@ -1,0 +1,47 @@
+//冒泡排序
+//（加入功能：当检测该趟检测数据都是正确排序，则break；节省时间。）
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<stdio.h>
+
+void bubble_sort(int arr[],int size);
+void bubble_sort(int arr[],int* size)
+{
+
+	int i;
+	int* temp;
+	for (i = 0; i < *size-1; i++)
+	{
+			int j;
+			j = 0;
+			int flag = 1; //假设本趟数据已为有序
+			while (j < *size - 1-i)//这里-i也是为了节省时间（没注意到）
+			{
+				if (arr[j] > arr[j + 1])
+				{
+					temp = arr[j];
+					arr[j] = arr[j + 1];
+					arr[j + 1] = temp;
+					flag = 0;
+				}j++;
+			}
+			if (flag == 1)
+			{
+				break;    //节省时间，这里的break跳出的是外层的for循环。
+				               //break只用于for和switch，单独用在if语句报错！！！
+			}
+	}
+	for (i = 0;i < *size; i++)
+	{
+		printf("%d ", arr[i]);
+	}
+	
+}
+
+int main()
+{
+	int arr[] = { 5,3,7,1,4,2,6,9,8,10 };
+	int size = sizeof(arr) / sizeof(arr[0]);
+	bubble_sort(arr,&size);
+
+	return 0;
+}
